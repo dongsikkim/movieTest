@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_home"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.sundaydev.movieTest.ui.frament.SplashFragment"
+        android:label="SplashFragment">
+        <action
+            android:id="@+id/action_splashFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvFragment"
+        android:name="com.sundaydev.movieTest.ui.frament.TvFragment"
+        android:label="@string/tv">
+        <action
+            android:id="@+id/action_tvFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.sundaydev.movieTest.ui.frament.MovieFragment"
+        android:label="@string/movie"/>
+    <fragment
+        android:id="@+id/peopleFragment"
+        android:name="com.sundaydev.movieTest.ui.frament.PeopleFragment"
+        android:label="@string/people">
+        <action
+            android:id="@+id/action_peopleFragment_to_peopleDetailFragment"
+            app:destination="@id/peopleDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/peopleDetailFragment"
+        android:name="com.sundaydev.movieTest.ui.frament.PeopleDetailFragment"
+        android:label="@string/people_detail">
+        <action
+            android:id="@+id/action_peopleDetailFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <argument
+            android:name="peopleData"
+            app:argType="com.sundaydev.movieTest.data.PeopleDetail"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.sundaydev.movieTest.ui.frament.DetailFragment"
+        android:label="@string/movie_detail">
+        <action
+            android:id="@+id/action_detailFragment_to_peopleDetailFragment"
+            app:destination="@id/peopleDetailFragment" />
+        <argument
+            android:name="detailData"
+            app:argType="com.sundaydev.movieTest.data.MovieDetail"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieContentsFragment"
+        android:name="com.sundaydev.movieTest.ui.frament.MovieContentsFragment"
+        android:label="" >
+        <action
+            android:id="@+id/action_movieContentsFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+</navigation>

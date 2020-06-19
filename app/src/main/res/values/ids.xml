@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="system_mode" type="id" />
+    <item name="dark_mode" type="id" />
+    <item name="light_mode" type="id" />
+</resources>

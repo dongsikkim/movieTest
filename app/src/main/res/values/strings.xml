@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">movieTest</string>
+    <string name="api_key">5bfa8f8064753fa72108ecc627d1420b</string>
+    <string name="access_token_v4_read_only">eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YmZhOGY4MDY0NzUzZmE3MjEwOGVjYzYyN2QxNDIwYiIsInN1YiI6IjU2OWVkZGYxOTI1MTQxNDliYzAwMDU0OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vIwRDmA9iigkcIBAk98zNFfnB9UJ8vtFjcWBMxXFKWo</string>
+    <string name="popular">인기</string>
+    <string name="now_playing">상영중</string>
+    <string name="tv_now_playing">지금방영중</string>
+    <string name="upcoming">개봉예정</string>
+    <string name="today_playing">오늘방영</string>
+    <string name="top_rate">높은평점</string>
+    <string name="tv">TV프로그램</string>
+    <string name="movie">영화</string>
+    <string name="people">인물</string>
+    <string name="my_page">마이페이지</string>
+    <string name="note_rate">NR</string>
+    <string name="people_detail">인물상세</string>
+    <string name="movie_detail">영화상세</string>
+    <string name="transition_image">transition_image_%1d</string>
+    <string name="biography">약력\n%s</string>
+    <string name="light_mode">라이트 모드</string>
+    <string name="dark_mode">다크 모드</string>
+    <string name="bright_system_mode">시스템설정에 따름</string>
+</resources>
