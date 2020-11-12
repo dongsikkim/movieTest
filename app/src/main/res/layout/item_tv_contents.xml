@@ -42,7 +42,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/poster"
-                loadImage="@{item.poster_path}"
+                app:loadImage="@{item.poster_path}"
                 android:layout_width="match_parent"
                 android:layout_height="260dp"
                 android:scaleType="fitXY"
@@ -72,7 +72,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/vote_rate"
                 style="@style/Overline"
-                percentage="@{item.displayVote()}"
+                app:percentage="@{item.displayVote()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"

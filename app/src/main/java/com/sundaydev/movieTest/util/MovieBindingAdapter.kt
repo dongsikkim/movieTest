@@ -76,8 +76,8 @@ fun setOtherName(view: AppCompatTextView, nameList: List<String>?) {
 }
 
 @BindingAdapter("defaultItemDecorator")
-fun setDefaultItemDecorator(recyclerView: RecyclerView, drawable: Drawable) {
-    recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL).apply {
+fun RecyclerView.setDefaultItemDecorator(drawable: Drawable) {
+    addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {
         setDrawable(drawable)
     })
 }

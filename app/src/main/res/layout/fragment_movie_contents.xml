@@ -21,13 +21,13 @@
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/refresh_layout"
-            refresh="@{viewModel.isRefresh()}"
+            app:refresh="@{viewModel.isRefresh()}"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/contents_recycler"
-                defaultItemDecorator="@{@drawable/divider_space}"
+                app:defaultItemDecorator="@{@drawable/divider_space}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -61,7 +61,7 @@
             app:layout_constraintTop_toBottomOf="@id/error_text" />
 
         <androidx.constraintlayout.widget.Group
-            visibleGone="@{viewModel.error}"
+            app:visibleGone="@{viewModel.error}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:constraint_referenced_ids="error_text, retry, error_bg" />

@@ -43,13 +43,13 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/poster"
-            loadImage="@{viewModel.detailData.poster_path}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toStartOf="@id/info_layout"
             app:layout_constraintStart_toEndOf="@id/guide_start"
-            app:layout_constraintTop_toBottomOf="@id/guide_top" />
+            app:layout_constraintTop_toBottomOf="@id/guide_top"
+            app:loadImage="@{viewModel.detailData.poster_path}" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/info_layout"
@@ -72,11 +72,11 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/backdrop"
-                loadImage="@{viewModel.detailData.backdrop_path}"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:scaleType="fitXY"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{viewModel.detailData.backdrop_path}" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title"
@@ -104,12 +104,12 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/genres"
                 style="@style/Body2"
-                genres="@{viewModel.detailData.genres}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:gravity="end"
                 android:singleLine="true"
+                app:genres="@{viewModel.detailData.genres}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/rate_layout"
                 app:layout_constraintTop_toTopOf="@id/rate_layout" />
@@ -117,14 +117,14 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/running_time"
                 style="@style/Body2"
-                runtime="@{viewModel.detailData.runtime}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:gravity="end"
                 android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="@id/rate_layout"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:runtime="@{viewModel.detailData.runtime}" />
 
             <include
                 android:id="@+id/rate_layout"

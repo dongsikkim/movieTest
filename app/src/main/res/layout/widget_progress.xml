@@ -32,7 +32,6 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/vote_rate"
             style="@style/Overline"
-            percentage="@{rate}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -40,6 +39,7 @@
             app:layout_constraintBottom_toBottomOf="@id/rate"
             app:layout_constraintEnd_toEndOf="@id/rate"
             app:layout_constraintStart_toStartOf="@id/rate"
-            app:layout_constraintTop_toTopOf="@id/rate" />
+            app:layout_constraintTop_toTopOf="@id/rate"
+            app:percentage="@{rate}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
