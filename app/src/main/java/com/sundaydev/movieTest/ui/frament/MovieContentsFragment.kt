@@ -28,7 +28,6 @@ fun createMovieContentsFragment(movieTabInfo: MovieTabInfo) = MovieContentsFragm
 
 class MovieContentsFragment : Fragment() {
     private val viewModelMovie: MovieContentsViewModel by viewModel { parametersOf(filterName) }
-    private val movieAdapter: MovieContentsAdapter by lazy { MovieContentsAdapter(onClicks) }
     lateinit var filterName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,25 +40,20 @@ class MovieContentsFragment : Fragment() {
         FragmentMovieContentsBinding.inflate(inflater).apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = viewModelMovie
-            contentsRecycler.adapter = movieAdapter
         }.root
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        refresh_layout.setOnRefreshListener { viewModelMovie.refresh() }
-        retry.setOnClickListener { viewModelMovie.refresh() }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModelMovie.list.observe(viewLifecycleOwner, Observer { setData(it) })
-    }
-
-    private fun setData(it: PagedList<Movie>?) {
-        if (refresh_layout.isRefreshing) {
-            movieAdapter.submitList(null)
+        with(MovieContentsAdapter(onClicks)) {
+            contents_recycler.adapter = this
+            refresh_layout.setOnRefreshListener { viewModelMovie.refresh() }
+            retry.setOnClickListener { viewModelMovie.refresh() }
+            viewModelMovie.list.observe(viewLifecycleOwner, Observer { setData(it, this) })
         }
+    }
+
+    private fun setData(it: PagedList<Movie>?, movieAdapter: MovieContentsAdapter) {
+        if (refresh_layout.isRefreshing) movieAdapter.submitList(null)
         movieAdapter.submitList(it)
         viewModelMovie.isRefresh.postValue(false)
     }

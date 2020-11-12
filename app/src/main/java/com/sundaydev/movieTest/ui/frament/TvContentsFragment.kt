@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import com.sundaydev.movieTest.databinding.FragmentTvContentsBinding
 import com.sundaydev.movieTest.ui.adapters.TvContentsAdapter
 import com.sundaydev.movieTest.viewmodel.TvContentsViewModel
+import kotlinx.android.synthetic.main.fragment_tv_contents.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -19,7 +20,6 @@ fun createTvContentsFragment(tvInfo: TvTabInfo) = TvContentsFragment().apply {
 
 class TvContentsFragment : Fragment() {
     private val tvContentsViewModel: TvContentsViewModel by viewModel { parametersOf(filterName) }
-    private val adapter: TvContentsAdapter by lazy { TvContentsAdapter() }
     lateinit var filterName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,11 +32,13 @@ class TvContentsFragment : Fragment() {
         FragmentTvContentsBinding.inflate(inflater).apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = tvContentsViewModel
-            contentsRecycler.adapter = adapter
         }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tvContentsViewModel.list.observe(viewLifecycleOwner, Observer(adapter::submitList))
+        with(TvContentsAdapter()) {
+            contents_recycler.adapter = this
+            tvContentsViewModel.list.observe(viewLifecycleOwner, Observer(this::submitList))
+        }
     }
 }
