@@ -7,17 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.os.bundleOf
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
-import androidx.paging.PagedListAdapter
-import com.sundaydev.movieTest.BR
 import com.sundaydev.movieTest.R
 import com.sundaydev.movieTest.data.Movie
 import com.sundaydev.movieTest.databinding.FragmentMovieContentsBinding
-import com.sundaydev.movieTest.util.BindingViewHolder
+import com.sundaydev.movieTest.ui.adapters.MovieContentsAdapter
 import com.sundaydev.movieTest.viewmodel.MovieContentsViewModel
 import kotlinx.android.synthetic.main.fragment_movie_contents.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -78,20 +75,5 @@ class MovieContentsFragment : Fragment() {
     private val onClicks: ((Pair<AppCompatImageView, Movie>) -> Unit)? = { pair ->
         val extras = androidx.navigation.fragment.FragmentNavigatorExtras(pair.first to pair.first.transitionName)
         findNavController().navigate(R.id.detailFragment, bundleOf(KEY_MOVIE to pair.second.toDetail()), null, extras)
-    }
-}
-
-class MovieContentsAdapter(private val onClicks: ((Pair<AppCompatImageView, Movie>) -> Unit)? = null) :
-    PagedListAdapter<Movie, BindingViewHolder>(Movie.diffMovieUtil) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder =
-        BindingViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_movie_contents, parent, false))
-
-    override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
-        holder.binding.setVariable(BR.item, getItem(position))
-        holder.binding.executePendingBindings()
-        holder.binding.root.setOnClickListener {
-            val poster = holder.binding.root.findViewById<AppCompatImageView>(R.id.poster)
-            getItem(position)?.let { onClicks?.invoke(Pair(poster, it)) }
-        }
     }
 }

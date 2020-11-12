@@ -5,15 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.paging.PagedListAdapter
-import com.sundaydev.movieTest.BR
-import com.sundaydev.movieTest.R
-import com.sundaydev.movieTest.data.Tv
 import com.sundaydev.movieTest.databinding.FragmentTvContentsBinding
-import com.sundaydev.movieTest.util.BindingViewHolder
+import com.sundaydev.movieTest.ui.adapters.TvContentsAdapter
 import com.sundaydev.movieTest.viewmodel.TvContentsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -43,15 +38,5 @@ class TvContentsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tvContentsViewModel.list.observe(viewLifecycleOwner, Observer(adapter::submitList))
-    }
-}
-
-class TvContentsAdapter : PagedListAdapter<Tv, BindingViewHolder>(Tv.diffTvUtil) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder =
-        BindingViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_tv_contents, parent, false))
-
-    override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
-        holder.binding.setVariable(BR.item, getItem(position))
-        holder.binding.executePendingBindings()
     }
 }
