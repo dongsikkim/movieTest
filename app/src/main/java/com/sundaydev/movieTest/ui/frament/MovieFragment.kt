@@ -8,12 +8,12 @@ import android.view.*
 import androidx.annotation.IdRes
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sundaydev.movieTest.Key
 import com.sundaydev.movieTest.PREF_NAME
 import com.sundaydev.movieTest.R
 import com.sundaydev.movieTest.databinding.FragmentMovieBinding
+import com.sundaydev.movieTest.ui.adapters.MovieViewPagerAdapter
 import com.sundaydev.movieTest.util.DayNight
 import com.sundaydev.movieTest.util.ThemeSelector
 import com.sundaydev.movieTest.viewmodel.MovieViewModel
@@ -66,9 +66,4 @@ class MovieFragment : Fragment() {
         Handler().postDelayed({ ThemeSelector.applyTheme(postMode) }, 450)
         return true
     }
-}
-
-class MovieViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
-    override fun getItemCount(): Int = 4
-    override fun createFragment(position: Int): Fragment = createMovieContentsFragment(MovieTabInfo.values()[position])
 }

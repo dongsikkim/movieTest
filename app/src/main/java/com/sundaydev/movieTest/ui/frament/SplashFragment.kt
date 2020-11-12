@@ -11,11 +11,10 @@ import com.sundaydev.movieTest.R
 import com.sundaydev.movieTest.databinding.FragmentSplashBinding
 
 class SplashFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: FragmentSplashBinding = FragmentSplashBinding.inflate(inflater)
-        binding.lifecycleOwner = viewLifecycleOwner
-        return binding.root
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+        FragmentSplashBinding.inflate(inflater).apply {
+            lifecycleOwner = viewLifecycleOwner
+        }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

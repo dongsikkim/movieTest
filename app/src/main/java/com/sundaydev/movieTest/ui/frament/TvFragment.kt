@@ -24,13 +24,13 @@ enum class TvTabInfo(@IdRes val resourceId: Int) {
 
 class TvFragment : Fragment() {
     private val viewPagerAdapter: TvViewPagerAdapter by lazy { TvViewPagerAdapter(this) }
-    private val viewModel: TvViewModel by viewModel()
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: FragmentTvBinding = FragmentTvBinding.inflate(inflater)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-        return binding.root
-    }
+    private val tvViewModel: TvViewModel by viewModel()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+        FragmentTvBinding.inflate(inflater).apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = tvViewModel
+        }.root
 
     @SuppressLint("ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

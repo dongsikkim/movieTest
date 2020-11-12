@@ -1,6 +1,7 @@
 package com.sundaydev.movieTest.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.DataBindingUtil
@@ -17,9 +18,12 @@ class MovieContentsAdapter(private val onClicks: ((Pair<AppCompatImageView, Movi
 
     override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
         holder.binding.setVariable(BR.item, getItem(position))
-        holder.binding.executePendingBindings()
-        holder.binding.root.setOnClickListener {
-            val poster = holder.binding.root.findViewById<AppCompatImageView>(R.id.poster)
+        holder.binding.root.bindingView(position)
+    }
+
+    private fun View.bindingView(position: Int) {
+        setOnClickListener {
+            val poster = findViewById<AppCompatImageView>(R.id.poster)
             getItem(position)?.let { onClicks?.invoke(Pair(poster, it)) }
         }
     }

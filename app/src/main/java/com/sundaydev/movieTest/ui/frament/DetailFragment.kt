@@ -38,7 +38,6 @@ class DetailFragment : Fragment() {
             viewModel = detailViewModel
         }.root
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ViewCompat.setTransitionName(poster, getString(R.string.transition_image, movieId))

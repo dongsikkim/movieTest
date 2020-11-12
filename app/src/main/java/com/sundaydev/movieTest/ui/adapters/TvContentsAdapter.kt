@@ -15,6 +15,5 @@ class TvContentsAdapter : PagedListAdapter<Tv, BindingViewHolder>(Tv.diffTvUtil)
 
     override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {
         holder.binding.setVariable(BR.item, getItem(position))
-        holder.binding.executePendingBindings()
     }
 }
