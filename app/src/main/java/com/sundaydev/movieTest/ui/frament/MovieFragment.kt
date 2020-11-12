@@ -30,18 +30,17 @@ enum class MovieTabInfo(@IdRes val resourceId: Int) {
 
 class MovieFragment : Fragment() {
     private lateinit var viewPagerAdapter: MovieViewPagerAdapter
-    private val viewModel: MovieViewModel by viewModel()
+    private val movieViewModel: MovieViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: FragmentMovieBinding = FragmentMovieBinding.inflate(inflater)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-        return binding.root
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+        FragmentMovieBinding.inflate(inflater).apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = movieViewModel
+        }.root
 
     @SuppressLint("ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,9 +52,7 @@ class MovieFragment : Fragment() {
         }.attach()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.theme_menu, menu)
-    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) = inflater.inflate(R.menu.theme_menu, menu)
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val preference = context?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)

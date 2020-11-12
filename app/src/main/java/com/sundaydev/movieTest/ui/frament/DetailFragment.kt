@@ -20,23 +20,24 @@ import org.koin.core.parameter.parametersOf
 const val KEY_MOVIE = "movie"
 
 class DetailFragment : Fragment() {
-    private val viewModel: DetailViewModel by viewModel { parametersOf(movieId) }
+    private val detailViewModel: DetailViewModel by viewModel { parametersOf(movieId) }
     private var movieId: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.getParcelable<MovieDetail>(KEY_MOVIE)?.let { detail ->
             movieId = detail.id
-            viewModel.detailData.postValue(detail)
+            detailViewModel.detailData.postValue(detail)
         }
         sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: FragmentDetailBinding = FragmentDetailBinding.inflate(inflater)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-        return binding.root
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+        FragmentDetailBinding.inflate(inflater).apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = detailViewModel
+        }.root
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

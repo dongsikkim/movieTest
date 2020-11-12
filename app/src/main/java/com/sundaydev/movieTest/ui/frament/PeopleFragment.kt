@@ -20,19 +20,18 @@ import com.sundaydev.movieTest.viewmodel.PeopleViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PeopleFragment : Fragment() {
-    private val viewModel: PeopleViewModel by viewModel()
+    private val peopleViewModel: PeopleViewModel by viewModel()
     private val peopleAdapter: PeopleAdapter by lazy { PeopleAdapter(onClick) }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        FragmentPeopleBinding.inflate(inflater).let {
-            it.lifecycleOwner = viewLifecycleOwner
-            it.viewModel = viewModel
-            it.peopleRecycler.adapter = peopleAdapter
-            it.root
-        }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+        FragmentPeopleBinding.inflate(inflater).apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = peopleViewModel
+            peopleRecycler.adapter = peopleAdapter
+        }.root
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel.list.observe(viewLifecycleOwner, Observer { peopleAdapter.submitList(it) })
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        peopleViewModel.list.observe(viewLifecycleOwner, Observer { peopleAdapter.submitList(it) })
     }
 
     private val onClick: ((Pair<AppCompatImageView, People>) -> Unit)? = { pair ->

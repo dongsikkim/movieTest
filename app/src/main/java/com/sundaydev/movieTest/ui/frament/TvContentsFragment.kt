@@ -24,7 +24,7 @@ fun createTvContentsFragment(tvInfo: TvTabInfo) = TvContentsFragment().apply {
 }
 
 class TvContentsFragment : Fragment() {
-    private val viewModelMovie: TvContentsViewModel by viewModel { parametersOf(filterName) }
+    private val tvContentsViewModel: TvContentsViewModel by viewModel { parametersOf(filterName) }
     private val adapter: TvContentsAdapter by lazy { TvContentsAdapter() }
     lateinit var filterName: String
 
@@ -34,17 +34,16 @@ class TvContentsFragment : Fragment() {
         filterName = tab.name
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: FragmentTvContentsBinding = FragmentTvContentsBinding.inflate(inflater)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModelMovie
-        binding.contentsRecycler.adapter = adapter
-        return binding.root
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+        FragmentTvContentsBinding.inflate(inflater).apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = tvContentsViewModel
+            contentsRecycler.adapter = adapter
+        }.root
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModelMovie.list.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        tvContentsViewModel.list.observe(viewLifecycleOwner, Observer(adapter::submitList))
     }
 }
 

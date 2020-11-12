@@ -41,13 +41,13 @@ class MovieContentsFragment : Fragment() {
         filterName = tab.name
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        FragmentMovieContentsBinding.inflate(inflater).let {
-            it.lifecycleOwner = viewLifecycleOwner
-            it.viewModel = viewModelMovie
-            it.contentsRecycler.adapter = movieAdapter
-            it.root
-        }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+        FragmentMovieContentsBinding.inflate(inflater).apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = viewModelMovie
+            contentsRecycler.adapter = movieAdapter
+        }.root
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,14 +68,12 @@ class MovieContentsFragment : Fragment() {
         viewModelMovie.isRefresh.postValue(false)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_refresh -> {
-                refresh_layout.isRefreshing = true;
-                return true
-            }
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.menu_refresh -> {
+            refresh_layout.isRefreshing = true
+            true
         }
-        return super.onOptionsItemSelected(item)
+        else -> super.onOptionsItemSelected(item)
     }
 
     private val onClicks: ((Pair<AppCompatImageView, Movie>) -> Unit)? = { pair ->
