@@ -1,7 +1,10 @@
 package com.sundaydev.movieTest.data
 
 import android.os.Parcelable
+import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.DiffUtil
+import com.sundaydev.movieTest.datasource.MovieDataSourceFactory
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -160,3 +163,5 @@ data class Country(val iso_3166_1: String, val name: String) : Parcelable
 
 @Parcelize
 data class SpokenLanguage(val iso_639_1: String, val name: String) : Parcelable
+
+data class MovieResult(val factory: MovieDataSourceFactory, val movieData: LiveData<PagedList<Movie>>)

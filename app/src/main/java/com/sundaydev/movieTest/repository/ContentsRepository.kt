@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.paging.Config
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.sundaydev.movieTest.data.Movie
 import com.sundaydev.movieTest.data.MovieDetail
+import com.sundaydev.movieTest.data.MovieResult
 import com.sundaydev.movieTest.data.Tv
 import com.sundaydev.movieTest.datasource.MovieDataSourceFactory
 import com.sundaydev.movieTest.datasource.TvDataSourceFactory
@@ -48,5 +48,3 @@ class ContentsRepositoryImpl : ContentsRepository, KoinComponent {
 
     override fun refreshMovie(factory: MovieDataSourceFactory?) = factory?.refresh()
 }
-
-data class MovieResult(val factory: MovieDataSourceFactory, val movieData: LiveData<PagedList<Movie>>)
