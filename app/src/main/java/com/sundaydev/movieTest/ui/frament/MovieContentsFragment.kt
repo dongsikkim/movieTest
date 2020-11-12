@@ -13,7 +13,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.DiffUtil
 import com.sundaydev.movieTest.BR
 import com.sundaydev.movieTest.R
 import com.sundaydev.movieTest.data.Movie
@@ -83,7 +82,7 @@ class MovieContentsFragment : Fragment() {
 }
 
 class MovieContentsAdapter(private val onClicks: ((Pair<AppCompatImageView, Movie>) -> Unit)? = null) :
-    PagedListAdapter<Movie, BindingViewHolder>(diffMovieUtil) {
+    PagedListAdapter<Movie, BindingViewHolder>(Movie.diffMovieUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder =
         BindingViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_movie_contents, parent, false))
 
@@ -95,9 +94,4 @@ class MovieContentsAdapter(private val onClicks: ((Pair<AppCompatImageView, Movi
             getItem(position)?.let { onClicks?.invoke(Pair(poster, it)) }
         }
     }
-}
-
-val diffMovieUtil = object : DiffUtil.ItemCallback<Movie>() {
-    override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean = oldItem.id == newItem.id
-    override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean = oldItem == newItem
 }

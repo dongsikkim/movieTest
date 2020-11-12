@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.DiffUtil
 import com.sundaydev.movieTest.BR
 import com.sundaydev.movieTest.R
 import com.sundaydev.movieTest.data.People
@@ -42,7 +41,7 @@ class PeopleFragment : Fragment() {
 }
 
 class PeopleAdapter(private val onClick: ((Pair<AppCompatImageView, People>) -> Unit)?) :
-    PagedListAdapter<People, BindingViewHolder>(diffPeopleUtil) {
+    PagedListAdapter<People, BindingViewHolder>(People.diffPeopleUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder =
         BindingViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_people, parent, false))
 
@@ -56,9 +55,4 @@ class PeopleAdapter(private val onClick: ((Pair<AppCompatImageView, People>) -> 
             }
         }
     }
-}
-
-val diffPeopleUtil = object : DiffUtil.ItemCallback<People>() {
-    override fun areItemsTheSame(oldItem: People, newItem: People): Boolean = oldItem.id == newItem.id
-    override fun areContentsTheSame(oldItem: People, newItem: People): Boolean = oldItem == newItem
 }

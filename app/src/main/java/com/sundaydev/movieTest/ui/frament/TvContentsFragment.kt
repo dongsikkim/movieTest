@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.DiffUtil
 import com.sundaydev.movieTest.BR
 import com.sundaydev.movieTest.R
 import com.sundaydev.movieTest.data.Tv
@@ -47,7 +46,7 @@ class TvContentsFragment : Fragment() {
     }
 }
 
-class TvContentsAdapter : PagedListAdapter<Tv, BindingViewHolder>(diffTvUtil) {
+class TvContentsAdapter : PagedListAdapter<Tv, BindingViewHolder>(Tv.diffTvUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder =
         BindingViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_tv_contents, parent, false))
 
@@ -55,9 +54,4 @@ class TvContentsAdapter : PagedListAdapter<Tv, BindingViewHolder>(diffTvUtil) {
         holder.binding.setVariable(BR.item, getItem(position))
         holder.binding.executePendingBindings()
     }
-}
-
-val diffTvUtil = object : DiffUtil.ItemCallback<Tv>() {
-    override fun areItemsTheSame(oldItem: Tv, newItem: Tv): Boolean = oldItem.id == newItem.id
-    override fun areContentsTheSame(oldItem: Tv, newItem: Tv): Boolean = oldItem == newItem
 }
