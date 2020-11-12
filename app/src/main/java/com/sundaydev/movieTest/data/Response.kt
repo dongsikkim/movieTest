@@ -1,6 +1,10 @@
 package com.sundaydev.movieTest.data
 
 import android.os.Parcelable
+import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
+import androidx.recyclerview.widget.DiffUtil
+import com.sundaydev.movieTest.datasource.MovieDataSourceFactory
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -23,6 +27,13 @@ data class Tv(
     val vote_count: Int = 0
 ) {
     fun displayVote() = (vote_average * 10).toInt()
+
+    companion object {
+        val diffTvUtil = object : DiffUtil.ItemCallback<Tv>() {
+            override fun areItemsTheSame(oldItem: Tv, newItem: Tv): Boolean = oldItem.id == newItem.id
+            override fun areContentsTheSame(oldItem: Tv, newItem: Tv): Boolean = oldItem == newItem
+        }
+    }
 }
 
 data class Movie(
@@ -45,6 +56,13 @@ data class Movie(
         title = title, video = video, poster_path = poster_path, popularity = popularity, original_language = original_language,
         backdrop_path = backdrop_path, vote_average = vote_average, overview = overview, vote_count = vote_count
     )
+
+    companion object {
+        val diffMovieUtil = object : DiffUtil.ItemCallback<Movie>() {
+            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean = oldItem.id == newItem.id
+            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean = oldItem == newItem
+        }
+    }
 }
 
 data class People(
@@ -52,6 +70,13 @@ data class People(
     /*val known_for: List<String>, */val name: String, val popularity: Float
 ) {
     fun toPeopleDetail() = PeopleDetail(id = id, adult = adult, name = name, popularity = popularity, profile_path = profile_path)
+
+    companion object {
+        val diffPeopleUtil = object : DiffUtil.ItemCallback<People>() {
+            override fun areItemsTheSame(oldItem: People, newItem: People): Boolean = oldItem.id == newItem.id
+            override fun areContentsTheSame(oldItem: People, newItem: People): Boolean = oldItem == newItem
+        }
+    }
 }
 
 @Parcelize
@@ -138,3 +163,5 @@ data class Country(val iso_3166_1: String, val name: String) : Parcelable
 
 @Parcelize
 data class SpokenLanguage(val iso_639_1: String, val name: String) : Parcelable
+
+data class MovieResult(val factory: MovieDataSourceFactory, val movieData: LiveData<PagedList<Movie>>)

@@ -8,12 +8,12 @@ import android.view.*
 import androidx.annotation.IdRes
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sundaydev.movieTest.Key
 import com.sundaydev.movieTest.PREF_NAME
 import com.sundaydev.movieTest.R
 import com.sundaydev.movieTest.databinding.FragmentMovieBinding
+import com.sundaydev.movieTest.ui.adapters.MovieViewPagerAdapter
 import com.sundaydev.movieTest.util.DayNight
 import com.sundaydev.movieTest.util.ThemeSelector
 import com.sundaydev.movieTest.viewmodel.MovieViewModel
@@ -30,18 +30,17 @@ enum class MovieTabInfo(@IdRes val resourceId: Int) {
 
 class MovieFragment : Fragment() {
     private lateinit var viewPagerAdapter: MovieViewPagerAdapter
-    private val viewModel: MovieViewModel by viewModel()
+    private val movieViewModel: MovieViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: FragmentMovieBinding = FragmentMovieBinding.inflate(inflater)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-        return binding.root
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+        FragmentMovieBinding.inflate(inflater).apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = movieViewModel
+        }.root
 
     @SuppressLint("ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,9 +52,7 @@ class MovieFragment : Fragment() {
         }.attach()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.theme_menu, menu)
-    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) = inflater.inflate(R.menu.theme_menu, menu)
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val preference = context?.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
@@ -69,9 +66,4 @@ class MovieFragment : Fragment() {
         Handler().postDelayed({ ThemeSelector.applyTheme(postMode) }, 450)
         return true
     }
-}
-
-class MovieViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
-    override fun getItemCount(): Int = 4
-    override fun createFragment(position: Int): Fragment = createMovieContentsFragment(MovieTabInfo.values()[position])
 }

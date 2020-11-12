@@ -43,7 +43,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/poster"
-                loadImage="@{item.poster_path}"
+                app:loadImage="@{item.poster_path}"
                 android:transitionName="@{@string/transition_image(item.id)}"
                 android:layout_width="match_parent"
                 android:layout_height="260dp"
@@ -59,7 +59,7 @@
             <include
                 android:id="@+id/rate_layout"
                 layout="@layout/widget_progress"
-                rate="@{item.displayVote()}"
+                app:rate="@{item.displayVote()}"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 app:layout_constraintBottom_toBottomOf="@id/bottom_space"

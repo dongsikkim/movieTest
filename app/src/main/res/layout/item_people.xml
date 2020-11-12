@@ -42,8 +42,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/profile_image"
-                loadImage="@{item.profile_path}"
-                original="@{true}"
+                app:loadImage="@{item.profile_path}"
+                app:original="@{true}"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
                 android:scaleType="centerCrop"
