@@ -46,7 +46,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.2.2"
 
     // Koin for Kotlin
-    def koin_version = '2.1.5'
+    def koin_version = '2.2.0-alpha-1'
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.koin:koin-core-ext:$koin_version"
     implementation "org.koin:koin-android:$koin_version"
