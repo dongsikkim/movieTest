@@ -14,7 +14,7 @@ const val PARAM_REGION = "region"
 class CommonParam : Interceptor, KoinComponent {
     private val context: Context by inject()
     override fun intercept(chain: Interceptor.Chain): Response {
-        val httpUrl = chain.request().url().newBuilder()
+        val httpUrl = chain.request().url.newBuilder()
             .addQueryParameter(PARAM_API_KEY, context.getString(R.string.api_key))
             .addQueryParameter(PARAM_LANGUAGE, "ko")
             .addQueryParameter(PARAM_REGION, "kr").build()

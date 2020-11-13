@@ -20,16 +20,16 @@ interface MovieService {
     fun getTopRatedMovie(@Query("page") page: Int = 1): Single<Movies>
 
     @GET("tv/popular")
-    fun getPopularTv(@Query("page") page: Int = 1): Single<Tvs>
+    suspend fun getPopularTv(@Query("page") page: Int = 1): Tvs
 
     @GET("tv/on_the_air")
-    fun getNowPlayingTv(@Query("page") page: Int = 1): Single<Tvs>
+    suspend fun getNowPlayingTv(@Query("page") page: Int = 1): Tvs
 
     @GET("tv/airing_today")
-    fun getTodayTv(@Query("page") page: Int = 1): Single<Tvs>
+    suspend fun getTodayTv(@Query("page") page: Int = 1): Tvs
 
     @GET("tv/top_rated")
-    fun getTopRatedTv(@Query("page") page: Int = 1): Single<Tvs>
+    suspend fun getTopRatedTv(@Query("page") page: Int = 1): Tvs
 
     @GET("movie/{movie_id}")
     fun getMovieDetail(@Path("movie_id") movie_id: Int): Single<MovieDetail>
