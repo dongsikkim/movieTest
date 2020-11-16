@@ -38,7 +38,7 @@ class TvContentsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(TvContentsAdapter()) {
             contents_recycler.adapter = this
-            tvContentsViewModel.list.observe(viewLifecycleOwner, Observer(this::submitList))
+            tvContentsViewModel.list.observe(viewLifecycleOwner, Observer { this.submitData(lifecycle, it) })
         }
     }
 }

@@ -26,7 +26,7 @@ class PeopleDetailFragment : Fragment() {
 
         receiveData?.let { peopleDetail ->
             peopleDetailViewModel.detailData.value = peopleDetail
-            peopleDetailViewModel.loadPeopleDetail(id)
+            peopleDetailViewModel.loadPeopleDetail(peopleDetail.id)
         }
         transition()
     }

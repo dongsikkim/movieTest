@@ -9,6 +9,7 @@ import com.sundaydev.movieTest.util.subscribeByCommon
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 
+/*
 class TvDataSource(private val apiService: MovieService, private val filterName: String, private val disposable: CompositeDisposable) :
     PageKeyedDataSource<Int, Tv>() {
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Tv>) {
@@ -42,4 +43,4 @@ class TvDataSourceFactory(private val apiService: MovieService, private val filt
     lateinit var dataSource: TvDataSource
     override fun create(): DataSource<Int, Tv> = TvDataSource(apiService, filterName, disposable).also { dataSource = it }
     fun refresh() = dataSource.refresh()
-}
+}*/
